@@ -32,6 +32,11 @@ export default function MusicPlayer() {
     }
   }, [sound])
 
+
+  useEffect(()=>{
+      nextTrack()
+  }, [currentTrackIndex])
+
   const handleDirectorySelection = async () => {
     try {
       setIsLoading(true)
@@ -124,10 +129,10 @@ export default function MusicPlayer() {
         if (seekTimer.current) clearInterval(seekTimer.current)
       },
       onend: () => {
-        if (seekTimer.current) clearInterval(seekTimer.current)
-        nextTrack()
+          if (seekTimer.current) clearInterval(seekTimer.current)
+          nextTrack()
       },
-      loop:false
+
     })
 
     setSound(newSound)
@@ -211,7 +216,7 @@ export default function MusicPlayer() {
 
       {/* Wrap the existing content in a relative div to place it above the background */}
       <div className="relative z-10 flex flex-col h-full">
-        <div className="flex flex-1 overflow-hidden">
+        <div className="flex flex-1 overflow-y-scroll md:overflow-hidden">
           {/* <Sidebar onSelectDirectory={handleDirectorySelection} isLoading={isLoading} /> */}
 
           <div className="flex-1 overflow-hidden flex flex-col">
